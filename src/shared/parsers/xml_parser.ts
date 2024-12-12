@@ -7,12 +7,6 @@ import {
 import { BadRequestException } from '@nestjs/common';
 
 export default class XmlParser {
-  parserOptions: Record<string, any>;
-
-  constructor(parserOptions: Record<string, any>) {
-    this.parserOptions = parserOptions;
-  }
-
   parse(xml: string): DocumentType {
     const doc: DocumentType = {};
     let obj: XMLSerializedAsObject | XMLSerializedAsObjectArray;
@@ -23,9 +17,7 @@ export default class XmlParser {
       });
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
-      throw new BadRequestException(
-        'source xml string is not valid. Please provide a valid xml string',
-      );
+      throw new BadRequestException('XML string is not valid');
     }
 
     const keys = Object.keys(obj['root']);

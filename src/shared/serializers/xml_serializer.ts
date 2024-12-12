@@ -3,11 +3,6 @@ import * as XmlBuilder2 from 'xmlbuilder2';
 import { documentTypeToJsonDoc } from '../utils';
 
 export default class XmlSerializer {
-  serializerOptions: Record<string, any>;
-  constructor(serializerOptions: Record<string, any>) {
-    this.serializerOptions = serializerOptions;
-  }
-
   serialize(doc: DocumentType): string {
     const jsonDoc: Record<string, any> = documentTypeToJsonDoc(doc);
 

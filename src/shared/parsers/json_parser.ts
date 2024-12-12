@@ -1,13 +1,19 @@
 import { DocumentType } from '../document_type';
+import { BadRequestException } from '@nestjs/common';
 
 export default class JsonParser {
-  parserOptions: Record<string, any>;
-  constructor(parserOptions: Record<string, any>) {
-    this.parserOptions = parserOptions;
-  }
-
   parse(inputStr: string): DocumentType {
-    const json: Record<string, any> = JSON.parse(inputStr);
+    let json: Record<string, any>;
+    try {
+      json = JSON.parse(inputStr);
+      if (JSON.stringify(json) !== inputStr) {
+        throw new Error();
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      throw new BadRequestException('Invalid JSON data');
+    }
+
     const doc: DocumentType = {};
 
     const keys = Object.keys(json);

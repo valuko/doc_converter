@@ -3,11 +3,11 @@ import XmlSerializer from './serializers/xml_serializer';
 import StringSerializer from './serializers/string_serializer';
 import { DocumentType } from './document_type';
 import { BadRequestException } from '@nestjs/common';
+import { StringConverterOptions } from './utils';
 
 export type SerializerType = 'json' | 'xml' | 'string';
 
 export interface iSerializer {
-  serializerOptions: Record<string, any>;
   serialize(doc: DocumentType): string;
 }
 
@@ -17,11 +17,12 @@ export const getSerializer = (
 ): iSerializer => {
   switch (serializerType) {
     case 'json':
-      return new JsonSerializer(serializerOptions);
+      return new JsonSerializer();
     case 'xml':
-      return new XmlSerializer(serializerOptions);
+      return new XmlSerializer();
     case 'string':
-      return new StringSerializer(serializerOptions);
+      const opts = serializerOptions as StringConverterOptions;
+      return new StringSerializer(opts);
     default:
       throw new BadRequestException(
         `Unsupported serializer type: ${serializerType}`,

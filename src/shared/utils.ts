@@ -1,5 +1,10 @@
 import { DocumentType } from './document_type';
 
+export type StringConverterOptions = {
+  line_separator: string;
+  value_separator: string;
+};
+
 const generateValuesObj = (
   values: string[],
   key: string,

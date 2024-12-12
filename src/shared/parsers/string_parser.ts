@@ -1,19 +1,25 @@
 import { DocumentType } from '../document_type';
+import { BadRequestException } from '@nestjs/common';
+import { StringConverterOptions } from '../utils';
 
 export default class StringParser {
-  parserOptions: Record<string, any>;
   lineSeparator: string;
   valueSeparator: string;
 
-  constructor(parserOptions: Record<string, any>) {
-    this.parserOptions = parserOptions;
-    this.lineSeparator = parserOptions['line_separator'] as string;
-    this.valueSeparator = parserOptions['value_separator'] as string;
+  constructor(parserOptions: StringConverterOptions) {
+    this.lineSeparator = parserOptions.line_separator;
+    this.valueSeparator = parserOptions.value_separator;
   }
 
   parse(input: string): DocumentType {
-    const doc: DocumentType = {};
+    if (!this.lineSeparator) {
+      throw new BadRequestException('Line separator is required');
+    }
+    if (!this.valueSeparator) {
+      throw new BadRequestException('Value separator is required');
+    }
 
+    const doc: DocumentType = {};
     const lines = input.split(this.lineSeparator);
     for (let i = 0; i < lines.length; i++) {
       const lineParts = lines[i].split(this.valueSeparator);

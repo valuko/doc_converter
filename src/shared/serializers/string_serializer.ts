@@ -1,14 +1,13 @@
 import { DocumentType } from '../document_type';
+import { StringConverterOptions } from '../utils';
 
 export default class StringSerializer {
-  serializerOptions: Record<string, any>;
   lineSeparator: string;
   valueSeparator: string;
 
-  constructor(serializerOptions: Record<string, any>) {
-    this.serializerOptions = serializerOptions;
-    this.lineSeparator = serializerOptions['line_separator'] as string;
-    this.valueSeparator = serializerOptions['value_separator'] as string;
+  constructor(serializerOptions: StringConverterOptions) {
+    this.lineSeparator = serializerOptions.line_separator;
+    this.valueSeparator = serializerOptions.value_separator;
   }
 
   serialize(doc: DocumentType): string {
