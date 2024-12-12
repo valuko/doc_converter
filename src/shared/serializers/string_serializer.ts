@@ -13,7 +13,6 @@ export default class StringSerializer {
 
   serialize(doc: DocumentType): string {
     let serialStr = '';
-    const serialRows: string[] = [];
 
     const keys = Object.keys(doc);
     for (let i = 0; i < keys.length; i++) {
@@ -23,12 +22,10 @@ export default class StringSerializer {
       for (let j = 0; j < valueKeys.length; j++) {
         const rowValues = values[j];
         const rowStr = [key, ...rowValues].join(this.valueSeparator);
-        serialRows.push(rowStr);
         serialStr += `${rowStr}${this.lineSeparator}`;
       }
     }
 
-    // return serialRows.join(this.lineSeparator);
     return serialStr;
   }
 }

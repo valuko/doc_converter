@@ -23,6 +23,8 @@ export const getSerializer = (
     case 'string':
       return new StringSerializer(serializerOptions);
     default:
-      throw new BadRequestException(`Unsupported serializer type: ${serializerType}`);
+      throw new BadRequestException(
+        `Unsupported serializer type: ${serializerType}`,
+      );
   }
 };

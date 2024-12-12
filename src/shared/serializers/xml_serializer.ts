@@ -15,8 +15,6 @@ export default class XmlSerializer {
       root: jsonDoc,
     };
     const xmlDoc = XmlBuilder2.create(obj);
-    const xmlStr = xmlDoc.end({ prettyPrint: true });
-
-    return xmlStr;
+    return xmlDoc.end({ prettyPrint: true });
   }
 }
