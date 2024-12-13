@@ -13,7 +13,7 @@ export interface iParser {
 
 export const getParser = (
   parserType: ParserType,
-  parserOptions: Record<string, any>,
+  parserOptions: Record<string, any> = {},
 ): iParser => {
   switch (parserType) {
     case 'json':
