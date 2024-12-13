@@ -57,10 +57,10 @@ export class ConverterDto {
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => ConverterInputDto)
-  readonly input: ConverterInputDto;
+  input: ConverterInputDto;
 
   @IsNotEmpty()
   @ValidateNested()
   @Type(() => ConverterOutputDto)
-  readonly output: ConverterOutputDto;
+  output: ConverterOutputDto;
 }
